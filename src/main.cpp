@@ -1154,8 +1154,6 @@ unsigned int static GetNextWorkRequired_V1(const CBlockIndex* pindexLast, const 
     // Only change once per interval
     if ((pindexLast->nHeight+1) % nInterval != 0)
     {
-        printf("Difficulty Retarget - none needed.\n");
-
         // Special difficulty rule for testnet:
         if (fTestNet)
         {
@@ -1206,7 +1204,7 @@ unsigned int static GetNextWorkRequired_V1(const CBlockIndex* pindexLast, const 
         bnNew = bnProofOfWorkLimit;
 
     /// debug print
-    printf("Difficulty Retarget - GetNextWorkRequired RETARGET\n");
+    printf("Difficulty Retarget - GetNextWorkRequired_V1 RETARGET\n");
     printf("nTargetTimespan = %"PRI64d"    nActualTimespan = %"PRI64d"\n", nTargetTimespan, nActualTimespan);
     printf("Before: %08x  %s\n", pindexLast->nBits, CBigNum().SetCompact(pindexLast->nBits).getuint256().ToString().c_str());
     printf("After:  %08x  %s\n", bnNew.GetCompact(), bnNew.getuint256().ToString().c_str());
@@ -1300,7 +1298,7 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
 	}
 	else
 	{
-		if (pindexLast->nHeight+1 >= 229000) { DiffMode = 2; }
+		if (pindexLast->nHeight+1 >= 230000) { DiffMode = 2; }
 	}
         
 	if (DiffMode == 1) { return GetNextWorkRequired_V1(pindexLast, pblock); }
